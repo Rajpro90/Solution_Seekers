@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather & AQI</title>
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+
+<div class="overlay">
+    <div class="container">
+
+        <!-- APP HEADER -->
+        <header>
+            <h1>Weather & AQI</h1>
+            <p id="locationText">Detecting location...</p>
+            <p id="dateTime"></p>
+        </header>
+
+        <!-- MAIN INFO CARD -->
+        <div class="main-card">
+            <div class="aqi-info">
+                <h2 id="aqiValue">--</h2>
+                <p id="aqiCategory">--</p>
+            </div>
+            <div class="weather-icon">
+                <img src="https://img.icons8.com/ios-filled/100/ffffff/sun--v1.png" alt="weather icon">
+            </div>
+        </div>
+
+        <!-- USER INPUT -->
+        <div class="input-section">
+            <input type="text" id="manualLocation" placeholder="Enter city name">
+            <button onclick="getAQI()">Check AQI</button>
+        </div>
+
+        <!-- AQI TABLE -->
+        <table id="aqiTable">
+            <tr>
+                <th>Time</th>
+                <th>Predicted AQI</th>
+            </tr>
+        </table>
+
+        <div class="forecast-section">
+            <h3>7-Day Forecast</h3>
+            <table id="forecastTable">
+                <tr>
+                    <th>Date</th>
+                    <th>Location</th>
+                    <th>Predicted AQI</th>
+                </tr>
+            </table>
+        </div>
+        <!-- MAP -->
+        <!-- after table -->
+        <div class="map-button">
+            <button onclick="window.location.href='forecast.html'">View Forecast Charts</button>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Your JS -->
+<script src="script.js"></script>
+</body>
+</html>

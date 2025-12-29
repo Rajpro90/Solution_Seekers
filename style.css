@@ -1,0 +1,275 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: url("bg.jpg") no-repeat center center/cover;
+}
+
+.overlay {
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 400px;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    color: white;
+}
+
+/* HEADER */
+header h1 {
+    color: white;
+    margin-bottom: 5px;
+}
+header p {
+    color: white;
+    font-size: 14px;
+}
+
+/* MAIN INFO CARD */
+.main-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 12px;
+    margin: 15px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    color: white;
+}
+
+.aqi-info h2 {
+    font-size: 32px;
+    color: white;
+}
+
+.aqi-info p {
+    font-size: 14px;
+    color: white;
+}
+
+.weather-icon img {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 0 2px white);
+}
+
+/* INPUT SECTION */
+.input-section {
+    margin: 15px 0;
+}
+input {
+    width: 65%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+button {
+    width: 30%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* AQI TABLE */
+#aqiTable {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    font-size: 14px;
+    display: none; /* hidden initially */
+}
+#aqiTable th {
+    background: #0284c7;
+    color: white;
+    padding: 8px;
+}
+#aqiTable td {
+    padding: 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+#aqiTable tr:nth-child(even) td {
+    background: #f1f5f9;
+    color:black;
+}
+.good { color: #16a34a; font-weight: 600; }
+.moderate { color: #ca8a04; font-weight: 600; }
+.unhealthy { color: #dc2626; font-weight: 600; }
+
+/* Map container fills screen with 10px margin */
+#mapContainer {
+    height: calc(100vh - 20px); /* full screen minus 10px margin */
+    margin: 10px;
+    position: relative; /* allows absolute positioning inside */
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* Back button on top-left of map */
+#backBtn {
+    position: absolute;
+    top: 15px;
+    left: 10px;
+    padding: 10px 15px;
+    background: rgba(255,255,255,0.8);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    z-index: 1000; /* ensures button is above map */
+    color : black;
+    font-weight: bold;
+}
+
+.aqi-label {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 1px 1px 2px black;
+}
+body {
+    margin: 0;
+    font-family: Arial;
+    transition: background 0.5s;
+}
+
+/* Backgrounds */
+body.good {
+    background: url("../images/clean_air.jpg") center/cover fixed;
+}
+body.moderate {
+    background: url("../images/moderate_air.jpg") center/cover fixed;
+}
+body.unhealthy {
+    background: url("../images/pollution.jpg") center/cover fixed;
+}
+
+/* Card */
+.card {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    width: 320px;
+    margin: 40px auto;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+}
+
+/* Table */
+table {
+    margin: 20px auto;
+    width: 80%;
+    border-collapse: collapse;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    display: none;
+}
+th, td {
+    padding: 10px;
+    border: 1px solid white;
+}
+
+/* Map */
+#map {
+    height: calc(100vh - 20px);
+    margin: 10px;
+    border-radius: 15px;
+}
+
+/* Slider */
+.time-slider {
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    padding: 10px 15px;
+    border-radius: 10px;
+    color: white;
+    z-index: 1000;
+}
+
+/* AQI Label */
+.aqi-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Back Button */
+.back-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    background: black;
+    color: white;
+    cursor: pointer;
+}
+/* Backgrounds mapped to AQI categories */
+body.good { background: url('clean_air.jpg') center/cover no-repeat; }
+body.moderate { background: url('moderate_air.jpg') center/cover no-repeat; }
+body.unhealthy { background: url('pollution.jpg') center/cover no-repeat; }
+
+/* Map Container */
+#map { height: 100vh; width: 100%; }
+.aqi-label {
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: white !important;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 1px 1px 2px black; /* Makes number readable on any color */
+    text-align: center;
+}
+#forecastTable {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+#forecastTable th {
+    background: #0284c7;
+    padding: 10px;
+}
+
+#forecastTable td {
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.aqi-label {
+    color: white !important;
+    font-weight: bold;
+    font-size: 14px;
+    text-shadow: 1px 1px 2px black; /* Makes white numbers visible on any color */
+    text-align: center;
+}

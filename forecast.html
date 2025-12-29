@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AQI Analytics & Forecast</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .charts-container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            overflow-y: auto;
+            height: 85vh;
+        }
+        .chart-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        h2 { text-align: center; color: white; margin-bottom: 20px; font-weight: 300; }
+        .nav-header { padding: 15px; display: flex; justify-content: flex-start; }
+    </style>
+</head>
+<body class="moderate"> <div class="overlay" style="display: block;">
+        <div class="nav-header">
+            <button class="back-btn" style="position: static;" onclick="window.location.href='index.html'">⬅ Back to Home</button>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h2>7-Day AQI Forecast</h2>
+                <canvas id="sevenDayChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h2>Hourly AQI Trend (24 Hours)</h2>
+                <canvas id="hourlyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="forecastScript.js"></script>
+</body>
+</html>
