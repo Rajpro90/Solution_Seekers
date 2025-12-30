@@ -1,1 +1,3 @@
-“A Machine Learning–based AQI prediction prototype designed to enhance air-quality awareness and support climate-focused innovation.”
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Note: This prototype serves as a preliminary demonstration of the AI-based Climate Monitoring and Prediction System, specifically focusing on the Air Quality Index (AQI) module. It currently integrates the frontend interface with the core Machine Learning model. Upon selection, our team is prepared to develop and scale the full-scope system as outlined in the proposal.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
