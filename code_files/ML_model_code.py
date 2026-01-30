@@ -13,30 +13,30 @@ Random Forest MAE: 37.4594
 
 === 24-HOUR HOURLY FORECAST ===
             Time  Predicted AQI                         Status
-2025-12-27 14:00          97.67                       Moderate
-2025-12-27 15:00         102.81 Unhealthy for Sensitive Groups
-2025-12-27 16:00         113.09 Unhealthy for Sensitive Groups
-2025-12-27 17:00         123.38 Unhealthy for Sensitive Groups
-2025-12-27 18:00         133.66 Unhealthy for Sensitive Groups
-2025-12-27 19:00         128.52 Unhealthy for Sensitive Groups
-2025-12-27 20:00         118.23 Unhealthy for Sensitive Groups
-2025-12-27 21:00         102.81 Unhealthy for Sensitive Groups
-2025-12-27 22:00          92.53                       Moderate
-2025-12-27 23:00          87.39                       Moderate
-2025-12-28 00:00          82.25                       Moderate
-2025-12-28 01:00          77.11                       Moderate
-2025-12-28 02:00          71.97                       Moderate
-2025-12-28 03:00          71.97                       Moderate
-2025-12-28 04:00          77.11                       Moderate
-2025-12-28 05:00          87.39                       Moderate
-2025-12-28 06:00         102.81 Unhealthy for Sensitive Groups
-2025-12-28 07:00         123.38 Unhealthy for Sensitive Groups
-2025-12-28 08:00         133.66 Unhealthy for Sensitive Groups
-2025-12-28 09:00         123.38 Unhealthy for Sensitive Groups
-2025-12-28 10:00         113.09 Unhealthy for Sensitive Groups
-2025-12-28 11:00         102.81 Unhealthy for Sensitive Groups
-2025-12-28 12:00          92.53                       Moderate
-2025-12-28 13:00          92.53                       Moderate
+2026-01-30 18:00         201.98                 Very Unhealthy
+2026-01-30 19:00         194.21                      Unhealthy
+2026-01-30 20:00         178.68                      Unhealthy
+2026-01-30 21:00         155.37                      Unhealthy
+2026-01-30 22:00         139.83 Unhealthy for Sensitive Groups
+2026-01-30 23:00         132.07 Unhealthy for Sensitive Groups
+2026-01-31 00:00         124.30 Unhealthy for Sensitive Groups
+2026-01-31 01:00         116.53 Unhealthy for Sensitive Groups
+2026-01-31 02:00         108.76 Unhealthy for Sensitive Groups
+2026-01-31 03:00         108.76 Unhealthy for Sensitive Groups
+2026-01-31 04:00         116.53 Unhealthy for Sensitive Groups
+2026-01-31 05:00         132.07 Unhealthy for Sensitive Groups
+2026-01-31 06:00         155.37                      Unhealthy
+2026-01-31 07:00         186.45                      Unhealthy
+2026-01-31 08:00         201.98                 Very Unhealthy
+2026-01-31 09:00         186.45                      Unhealthy
+2026-01-31 10:00         170.91                      Unhealthy
+2026-01-31 11:00         155.37                      Unhealthy
+2026-01-31 12:00         139.83 Unhealthy for Sensitive Groups
+2026-01-31 13:00         139.83 Unhealthy for Sensitive Groups
+2026-01-31 14:00         147.60 Unhealthy for Sensitive Groups
+2026-01-31 15:00         155.37                      Unhealthy
+2026-01-31 16:00         170.91                      Unhealthy
+2026-01-31 17:00         186.45                      Unhealthy
 
 === 7-DAY AQI & DISASTER RISK FORECAST (With Open-Meteo Weather) ===
   Day       Date  Predicted AQI                         Status  Disaster Risk
