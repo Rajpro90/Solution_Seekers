@@ -1,54 +1,132 @@
-// Mock Data consistent with your video
+// Dataset 1: Dummy/Test Data
 const mockData = {
-    location: "Ahmedabad, India",
+    location: "Ahmedabad (Test)",
     current_aqi: 149,
     status: "Unhealthy for Sensitive Groups",
-    hourly: [140, 165, 201, 180, 160, 145],
-    daily: [149, 155, 140, 135, 142, 138, 130],
-    disaster: { type: "Heatwave", prob: "87%", time: "12:00–16:00" }
+    hourly_details: [
+        {time: "06:00", aqi: 155, status: "Unhealthy"},
+        {time: "09:00", aqi: 186, status: "Unhealthy"},
+        {time: "12:00", aqi: 149, status: "Sensitive"}
+    ],
+    daily_details: [
+        {date: "Feb 06", aqi: 154, trend: "down"},
+        {date: "Feb 07", aqi: 150, trend: "down"}
+    ],
+    hourly: [155, 186, 149, 140, 135, 130],
+    daily: [154, 150, 147, 140, 135, 130, 125]
 };
-// Add to your initCharts function
-const ctx = document.getElementById('hourlyChart').getContext('2d');
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, 'rgba(0, 128, 128, 0.4)'); // Teal glow
-gradient.addColorStop(1, 'rgba(0, 128, 128, 0)');
 
-// Use 'gradient' as your dataset's backgroundColor
+// Dataset 2: Simulated "Live" Data (Used if backend fails or for preview)
+const simulatedLiveData = {
+    location: "Mumbai (Live)",
+    current_aqi: 82,
+    status: "Moderate",
+    hourly_details: [
+        {time: "06:00", aqi: 70, status: "Good"},
+        {time: "09:00", aqi: 85, status: "Moderate"},
+        {time: "12:00", aqi: 82, status: "Moderate"}
+    ],
+    daily_details: [
+        {date: "Feb 06", aqi: 82, trend: "up"},
+        {date: "Feb 07", aqi: 88, trend: "up"}
+    ],
+    hourly: [70, 85, 82, 90, 95, 100],
+    daily: [82, 88, 92, 95, 100, 105, 110]
+};
+
 let hChart, dChart;
+let currentActiveData = mockData; // Track current data globally
 
+// NAVIGATION
 function showPage(pageId) {
-    console.log("Navigating to:", pageId); // Check your browser console (F12) to see if this runs
-
-    // 1. Get all page sections
     const pages = document.querySelectorAll('.page');
-    
-    // 2. Remove 'active' class from all pages
-    pages.forEach(page => {
-        page.classList.remove('active');
-    });
+    pages.forEach(page => page.classList.remove('active'));
 
-    // 3. Add 'active' class to the target page
     const targetPage = document.getElementById(pageId);
     if (targetPage) {
         targetPage.classList.add('active');
-        window.scrollTo(0, 0); // Reset scroll to top
-    } else {
-        console.error("Page ID not found:", pageId);
+        window.scrollTo(0, 0);
     }
 
-    // 4. Load charts only if we are on the details page
     if (pageId === 'details') {
-        // Use a slight timeout to let the CSS 'display: block' take effect before Chart.js renders
-        setTimeout(initCharts, 100);
+        setTimeout(() => {
+            updateTables(currentActiveData);
+            initCharts(currentActiveData);
+        }, 100);
     }
 }
 
-// Ensure the Home page loads by default when the browser starts
-window.onload = () => {
-    showPage('home');
-};
+// TOGGLE LOGIC
+async function handleToggle() {
+    const isTestMode = document.getElementById('modeSwitch').checked;
+    const statusLabel = document.getElementById('mode-status');
+    
+    if (isTestMode) {
+        statusLabel.innerText = "Test Mode";
+        statusLabel.style.color = "#8b949e";
+        currentActiveData = mockData;
+        updateUI(currentActiveData);
+    } else {
+        statusLabel.innerText = "Live API";
+        statusLabel.style.color = "#4ade80";
+        try {
+            const response = await fetch('http://127.0.0.1:5000/api/live-data');
+            if (!response.ok) throw new Error("Offline");
+            currentActiveData = await response.json();
+        } catch (error) {
+            console.log("Using simulated live data (No backend found)");
+            currentActiveData = simulatedLiveData;
+        }
+        updateUI(currentActiveData);
+    }
+}
 
-function initCharts() {
+// UI UPDATES
+function updateUI(data) {
+    document.getElementById('city-name').innerText = data.location;
+    document.getElementById('aqi-num').innerText = data.current_aqi;
+    
+    // Update color based on AQI
+    const card = document.querySelector('.aqi-card-premium');
+    if (data.current_aqi > 150) {
+        card.style.background = 'linear-gradient(145deg, #e67e22, #d35400)';
+    } else {
+        card.style.background = 'linear-gradient(145deg, #008080, #006666)';
+    }
+
+    // Refresh tables and charts if on details page
+    if (document.getElementById('details').classList.contains('active')) {
+        updateTables(data);
+        initCharts(data);
+    }
+}
+
+function updateTables(data) {
+    const hBody = document.getElementById('hourly-table-body');
+    const dBody = document.getElementById('daily-table-body');
+
+    if (hBody && data.hourly_details) {
+        hBody.innerHTML = data.hourly_details.map(item => `
+            <tr>
+                <td>${item.time}</td>
+                <td style="font-weight:bold; color:#f39c12">${item.aqi}</td>
+                <td><span class="status-tag">${item.status}</span></td>
+            </tr>
+        `).join('');
+    }
+
+    if (dBody && data.daily_details) {
+        dBody.innerHTML = data.daily_details.map(item => `
+            <tr>
+                <td>${item.date}</td>
+                <td style="font-weight:bold; color:#008080">${item.aqi}</td>
+                <td>${item.trend === 'up' ? '📈 Rising' : '📉 Falling'}</td>
+            </tr>
+        `).join('');
+    }
+}
+
+function initCharts(data) {
     if (hChart) hChart.destroy();
     if (dChart) dChart.destroy();
 
@@ -61,12 +139,13 @@ function initCharts() {
         }
     };
 
-    hChart = new Chart(document.getElementById('hourlyChart'), {
+    const hCtx = document.getElementById('hourlyChart').getContext('2d');
+    hChart = new Chart(hCtx, {
         type: 'line',
         data: {
             labels: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
             datasets: [{
-                data: mockData.hourly,
+                data: data.hourly,
                 borderColor: '#008080',
                 backgroundColor: 'rgba(0, 128, 128, 0.2)',
                 fill: true,
@@ -76,12 +155,13 @@ function initCharts() {
         options: commonOptions
     });
 
-    dChart = new Chart(document.getElementById('dailyChart'), {
+    const dCtx = document.getElementById('dailyChart').getContext('2d');
+    dChart = new Chart(dCtx, {
         type: 'line',
         data: {
             labels: ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu'],
             datasets: [{
-                data: mockData.daily,
+                data: data.daily,
                 borderColor: '#008080',
                 tension: 0.4
             }]
@@ -90,55 +170,8 @@ function initCharts() {
     });
 }
 
-function fetchData() {
-    // Logic to toggle between Mock and API would go here
-    console.log("Data refreshed or Mode toggled");
-}
-
-// Start on Home
-window.onload = () => showPage('home');
-// Data for Live Mode (Simulating API response)
-const liveData = {
-    location: "Ahmedabad, India",
-    current_aqi: 166, // Different value for live
-    status: "Unhealthy",
-    hourly: [150, 170, 195, 210, 185, 155],
-    daily: [166, 160, 155, 150, 145, 140, 135],
-    disaster: { type: "None", prob: "12%", time: "N/A" }
+// STARTUP
+window.onload = () => {
+    showPage('home');
+    updateUI(mockData);
 };
-
-async function handleToggle() {
-    const isChecked = document.getElementById('modeSwitch').checked;
-    const statusText = document.getElementById('mode-status');
-
-    if (isChecked) {
-        statusText.innerText = "Test Mode";
-        updateUI(mockData);
-    } else {
-        statusText.innerText = "Live API";
-        try {
-            // Fetch real data from your Python backend
-            const response = await fetch('/api/live-data');
-            const data = await response.json();
-            updateUI(data);
-        } catch (error) {
-            console.error("Failed to fetch live data:", error);
-            statusText.innerText = "Connection Error";
-        }
-    }
-}
-
-function updateUI(data) {
-    // Dynamic background colors based on AQI (Like the video)
-    const card = document.querySelector('.aqi-card-premium');
-    if (data.current_aqi <= 50) {
-        card.style.background = 'linear-gradient(145deg, #2ecc71, #27ae60)';
-    } else if (data.current_aqi <= 100) {
-        card.style.background = 'linear-gradient(145deg, #f1c40f, #f39c12)';
-    } else {
-        card.style.background = 'linear-gradient(145deg, #e67e22, #d35400)';
-    }
-
-    document.getElementById('aqi-num').innerText = data.current_aqi;
-    document.getElementById('aqi-status').innerHTML = `<span class="warn-icon">⚠️</span> <strong>${data.status}</strong>`;
-}
