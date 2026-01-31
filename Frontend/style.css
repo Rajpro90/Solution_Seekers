@@ -354,7 +354,7 @@ canvas {
     margin-bottom: 20px;
 }
 .stats-icon-box { background: #1c2128; padding: 15px; border-radius: 16px; font-size: 1.5rem; }
-.trend-pill { background: rgba(74, 222, 128, 0.15); color: #4ade80; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-left: auto; }
+.trend-pill { background: rgba(74, 222, 128, 0.15); color: #c5df37; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 700; margin-left: auto; }
 
 /* --- Chart Boxes --- */
 .chart-container-premium {
@@ -402,3 +402,49 @@ canvas {
 }
 .safety-list { padding-left: 18px; color: var(--text-muted); }
 .safety-list li { margin-bottom: 12px; line-height: 1.4; }
+.ml-data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.ml-data-table thead {
+    background: rgba(0, 128, 128, 0.2);
+    color: var(--teal-primary);
+}
+
+.ml-data-table th, .ml-data-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ml-data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.ml-data-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.status-tag {
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+/* Fix Table Visibility */
+.ml-data-table td {
+    color: white !important;
+}
+
+.status-tag {
+    background: rgba(227, 223, 0, 0.2);
+    color: #d4e705;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
