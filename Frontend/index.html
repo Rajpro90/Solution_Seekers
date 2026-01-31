@@ -75,28 +75,45 @@
         <span class="back-text">AQI Details</span>
     </div>
     
-    <div class="stats-card-premium">
-        <div class="stats-icon-box">📈</div>
-        <div class="stats-main-info">
-            <h2 id="det-num">149</h2>
-            <p id="det-status">Unhealthy for Sensitive Groups</p>
-        </div>
-        <div class="trend-pill">Improving</div>
-    </div>
-
     <div class="chart-container-premium">
         <div class="chart-header">
-            <h3>24-Hour AQI Forecast</h3>
+            <h3>24-Hour Forecast Data</h3>
             <span class="dot-indicator"></span>
         </div>
+        
+        <table class="ml-data-table" id="hourly-table">
+            <thead>
+                <tr>
+                    <th>Time Slot</th>
+                    <th>Predicted AQI</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="hourly-table-body">
+                </tbody>
+        </table>
+
         <canvas id="hourlyChart"></canvas>
     </div>
 
     <div class="chart-container-premium">
         <div class="chart-header">
-            <h3>7-Day AQI Prediction</h3>
+            <h3>7-Day Prediction Analysis</h3>
             <span class="dot-indicator blue"></span>
         </div>
+
+        <table class="ml-data-table" id="daily-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Predicted AQI</th>
+                    <th>Trend</th>
+                </tr>
+            </thead>
+            <tbody id="daily-table-body">
+                </tbody>
+        </table>
+
         <canvas id="dailyChart"></canvas>
     </div>
 </section>
