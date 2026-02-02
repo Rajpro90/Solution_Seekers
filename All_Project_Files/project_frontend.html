@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climate Monitor</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="project_frontend_style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -129,23 +129,23 @@
     </div>
     
     <div class="disaster-detail-card">
-        <div class="disaster-title">
-            <span class="fire-icon">🔥</span>
-            <h2>Heatwave</h2>
+    <div class="disaster-title">
+        <span class="fire-icon">🔥</span>
+        <h2 id="disaster-type">Heatwave</h2>
+    </div>
+    <p class="disaster-subtitle">Predicted for: <span id="disaster-date" style="color:white; font-weight:bold;">Feb 06, 2026</span></p>
+    
+    <div class="metrics-grid">
+        <div class="metric-item">
+            <small>Probability</small>
+            <strong id="disaster-prob">87%</strong>
         </div>
-        <p class="disaster-subtitle">Predicted for today</p>
-        
-        <div class="metrics-grid">
-            <div class="metric-item">
-                <small>Probability</small>
-                <strong>87%</strong>
-            </div>
-            <div class="metric-item">
-                <small>Expected Time</small>
-                <strong>12:00–16:00</strong>
-            </div>
+        <div class="metric-item">
+            <small>Expected Time</small>
+            <strong id="disaster-time">12:00–16:00</strong>
         </div>
     </div>
+</div>
 
     <div class="safety-list-card">
         <h3>Safety Recommendations</h3>
@@ -158,6 +158,6 @@
 </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="project_script.js"></script>
 </body>
 </html>
