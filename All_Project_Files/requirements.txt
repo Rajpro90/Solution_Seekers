@@ -1,0 +1,12 @@
+requests
+pandas
+scikit-learn
+# tensorflow  <-- Temporarily removed due to installation issues on Windows/Python 3.14
+geocoder
+matplotlib
+openmeteo-requests
+requests-cache
+retry-requests
+flask
+flask-sqlalchemy
+joblib
