@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Monitor</title>
+    <link rel="stylesheet" href="project_frontend_style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-inner">
+            <div class="logo" onclick="showPage('home')" style="cursor:pointer">☁️ Climate Monitor</div>
+            <div class="toggle-container">
+                <span id="mode-status">Test Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="modeSwitch" checked onchange="handleToggle()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+    <section id="home" class="page active">
+        <div class="hero">
+            <div class="ai-label">🤖 AI-Powered Climate Insights</div>
+            <h1>Real-time Air Quality</h1>
+            <p>ML predictions for your location</p>
+        </div>
+
+        <div class="location-row">
+            <div class="loc-details">
+                <div class="icon-box">📍</div>
+                <div>
+                    <strong id="city-name">Ahmedabad, India</strong>
+                    <small id="location-subtitle">Using mock location</small>
+                </div>
+            </div>
+            <button class="icon-btn-refresh" onclick="fetchData()">🔄</button>
+        </div>
+
+        <div class="aqi-card-premium" onclick="showPage('details')">
+            <div class="card-header-row">
+                <span class="label-chip">💨 Air Quality Index</span>
+                <span class="arrow-circle">→</span>
+            </div>
+            <div class="aqi-main-val" id="aqi-num">149</div>
+            <div class="card-footer-row">
+                <div class="status-indicator">
+                    <span class="warn-icon">⚠️</span>
+                    <strong>Unhealthy for Sensitive Groups</strong>
+                </div>
+                <div class="tap-hint">Tap for details<br>7-day forecast</div>
+            </div>
+        </div>
+
+        <div class="disaster-strip-premium" onclick="showPage('disaster')">
+            <div class="alert-icon-box">🚨</div>
+            <div class="strip-info">
+                <strong>Disaster Alerts</strong>
+                <small id="disaster-preview">Heatwave predicted</small>
+            </div>
+            <span class="chevron">→</span>
+        </div>
+        
+        <footer class="sync-footer">
+            Data refreshes automatically • Powered by ML
+        </footer>
+    </section>
+    <section id="details" class="page">
+    <div class="back-nav-container" onclick="showPage('home')">
+        <span class="back-arrow">←</span>
+        <span class="back-text">AQI Details</span>
+    </div>
+    
+    <div class="chart-container-premium">
+        <div class="chart-header">
+            <h3>24-Hour Forecast Data</h3>
+            <span class="dot-indicator"></span>
+        </div>
+        
+        <table class="ml-data-table" id="hourly-table">
+            <thead>
+                <tr>
+                    <th>Time Slot</th>
+                    <th>Predicted AQI</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="hourly-table-body">
+                </tbody>
+        </table>
+
+        <canvas id="hourlyChart"></canvas>
+    </div>
+
+    <div class="chart-container-premium">
+        <div class="chart-header">
+            <h3>7-Day Prediction Analysis</h3>
+            <span class="dot-indicator blue"></span>
+        </div>
+
+        <table class="ml-data-table" id="daily-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Predicted AQI</th>
+                    <th>Trend</th>
+                </tr>
+            </thead>
+            <tbody id="daily-table-body">
+                </tbody>
+        </table>
+
+        <canvas id="dailyChart"></canvas>
+    </div>
+</section>
+<section id="disaster" class="page">
+    <div class="back-nav-container" onclick="showPage('home')">
+        <span class="back-arrow">←</span>
+        <span class="back-text">Disaster Alerts</span>
+    </div>
+
+    <div class="alert-banner-premium">
+        <span class="alert-icon">⚠️</span>
+        <p>A potential disaster has been predicted for your area. Please take necessary precautions immediately.</p>
+    </div>
+    
+    <div class="disaster-detail-card">
+    <div class="disaster-title">
+        <span class="fire-icon">🔥</span>
+        <h2 id="disaster-type">Heatwave</h2>
+    </div>
+    <p class="disaster-subtitle">Predicted for: <span id="disaster-date" style="color:white; font-weight:bold;">Feb 06, 2026</span></p>
+    
+    <div class="metrics-grid">
+        <div class="metric-item">
+            <small>Probability</small>
+            <strong id="disaster-prob">87%</strong>
+        </div>
+        <div class="metric-item">
+            <small>Expected Time</small>
+            <strong id="disaster-time">12:00–16:00</strong>
+        </div>
+    </div>
+</div>
+
+    <div class="safety-list-card">
+        <h3>Safety Recommendations</h3>
+        <ul class="safety-list">
+            <li>Stay hydrated and avoid outdoor activities.</li>
+            <li>Keep emergency contacts readily available.</li>
+            <li>Check on elderly neighbors and pets.</li>
+        </ul>
+    </div>
+</section>
+    </main>
+
+    <script src="project_script.js"></script>
+</body>
+</html>
