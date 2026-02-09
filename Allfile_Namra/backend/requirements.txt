@@ -1,0 +1,13 @@
+flask
+flask-sqlalchemy
+flask-cors
+pandas
+numpy
+scikit-learn
+openmeteo-requests
+requests-cache
+retry-requests
+python-dotenv
+joblib
+requests
+geocoder
