@@ -246,23 +246,30 @@ function updateTables(data) {
     // FIX: 24-Hour Forecast Table (Time Format)
     if (hBody && data.hourly_details) {
         const times = generateTimeSlots(data.hourly_details.length);
-        hBody.innerHTML = data.hourly_details.map((item, index) => `
+        hBody.innerHTML = data.hourly_details.map((item, index) => {
+            const rec = getAQIRecommendation(item.aqi);
+            return `
             <tr>
-                <td>${times[index]}</td> <td style="font-weight:bold; color:#f39c12">${Math.round(item.aqi)}</td>
+                <td>${times[index]}</td> 
+                <td style="font-weight:bold; color:#f39c12">${Math.round(item.aqi)}</td>
                 <td><span class="status-tag">${item.status || 'Analyzed'}</span></td>
+                <td><span class="rec-tag ${rec.class}">${rec.text}</span></td>
             </tr>
-        `).join('');
+        `}).join('');
     }
 
     // Daily Table (7-Day Forecast)
     if (dBody && data.daily_details) {
-        dBody.innerHTML = data.daily_details.map(item => `
+        dBody.innerHTML = data.daily_details.map(item => {
+            const rec = getAQIRecommendation(item.aqi);
+            return `
             <tr>
                 <td>${item.date}</td>
                 <td style="font-weight:bold; color:#008080">${Math.round(item.aqi)}</td>
                 <td>${item.trend === 'up' ? '📈 Rising' : '📉 Falling'}</td>
+                <td><span class="rec-tag ${rec.class}">${rec.text}</span></td>
             </tr>
-        `).join('');
+        `}).join('');
     }
 }
 
@@ -291,6 +298,15 @@ function getAQIStatus(aqi) {
     if (aqi <= 50) return "Good";
     if (aqi <= 100) return "Moderate";
     return "Unhealthy";
+}
+
+function getAQIRecommendation(aqi) {
+    if (aqi <= 50) return { text: "Enjoy outdoor activities.", class: "rec-good" };
+    if (aqi <= 100) return { text: "Wear mask if sensitive.", class: "rec-moderate" };
+    if (aqi <= 150) return { text: "Wear mask, reduce activity.", class: "rec-sensitive" };
+    if (aqi <= 200) return { text: "Avoid outdoors, use purifier.", class: "rec-unhealthy" };
+    if (aqi <= 300) return { text: "Stay indoors, use purifier.", class: "rec-unhealthy" };
+    return { text: "Emergency! Stay indoors.", class: "rec-emergency" };
 }
 function initCharts(data) {
     // backgroundColor: gradient
